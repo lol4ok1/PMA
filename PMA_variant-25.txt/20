@@ -1,0 +1,31 @@
+import math
+
+t = 0.27
+eps = 1e-8
+
+# 1. Считаем e^t
+term_e = 1.0
+sum_e = 1.0
+k_e = 0
+while abs(term_e) >= eps:
+    k_e += 1
+    term_e = term_e * t / k_e
+    sum_e += term_e
+
+# 2. Считаем cos(t)
+term_c = 1.0
+sum_c = 1.0
+k_c = 0
+while abs(term_c) >= eps:
+    k_c += 1
+    term_c = term_c * (-t * t) / ((2 * k_c - 1) * (2 * k_c))
+    sum_c += term_c
+
+# 3. Итоговый результат
+F = sum_e * sum_c
+exact_F = math.exp(t) * math.cos(t)
+
+print("F(0.27) =", F)
+print("Членов exp:", k_e + 1)
+print("Членов cos:", k_c + 1)
+print("Ошибка:", abs(F - exact_F))
