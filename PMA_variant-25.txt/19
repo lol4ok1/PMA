@@ -1,0 +1,14 @@
+x = 0.4
+eps = 1e-8
+
+term = 1.0
+cos_sum = 1.0
+k = 0
+
+while abs(term) >= eps:
+    k += 1
+    term *= -x * x / ((2 * k - 1) * (2 * k))
+    cos_sum += term
+
+print(f"cos(0.4) = {cos_sum:.8f}")
+print(f"Количество членов ряда: {k + 1}")
